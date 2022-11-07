@@ -295,8 +295,8 @@ class Trainer(object):
             acc = torch.eq(torch.argmax(query_scores, dim=-1), task.query_label).float().mean()
             accs.append(acc.item())
 
-            logging.info(loss.item())
-            logging.info(acc.item())
+#             logging.info(loss.item())
+#             logging.info(acc.item())
 
             if j % 50 == 0:
                 print('Epoch {} loss: {:.4f} acc: {:.4f}'.format(j, loss.item(), acc.item()))
