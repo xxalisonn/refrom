@@ -43,9 +43,9 @@ def read_options():
     # parser.add_argument("--grad_clip", default=5.0, type=float)
 
     args = parser.parse_args()
-    if not os.path.exists('models'):
-        os.mkdir('models')
-    args.save_path = 'models/' + args.prefix
+#     if not os.path.exists('models'):
+#         os.mkdir('models')
+#     args.save_path = 'models/' + args.prefix
 
     return args
 
