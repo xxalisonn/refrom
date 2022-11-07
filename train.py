@@ -353,7 +353,7 @@ class Trainer(object):
 
             acc = torch.eq(torch.argmax(query_scores, dim=-1), task.query_label).float().mean()
 
-            logging.info(loss.item(), acc.item())
+#             logging.info(loss.item(), acc.item())
 
             print('{}: loss: {:.4f} acc: {:.4f}'.format(mode, loss.item(), acc.item()))
 
