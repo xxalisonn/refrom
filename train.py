@@ -15,6 +15,7 @@ from torch import optim
 from torch.autograd import Variable
 from tqdm import tqdm
 import os
+from args import read_options
 
 if_cuda = torch.cuda.is_available()
 print('CUDA', if_cuda)
@@ -762,21 +763,24 @@ class Matcher(nn.Module):
         return scores, loss
 
 
+
 result = {}
 rel_acc = {}
 
-
+args = read_options()
 for dataset in ['FB15K_0.0_t33']:
 #for dataset in ['NELL', 'NELL_0.05', 'NELL_0.1', 'NELL_0.15', 'NELL_0.2']:
 #for dataset in ['NELL']:
 #for dataset in ['Wiki', 'Wiki_0.05','Wiki_0.1','Wiki_0.15', 'Wiki_0.2']:
-    batch_max = 5000
-    num_class = 3
-    for few_shot in [5]:
+    batch_max = args.max_batches
+    num_class = args.num_class
+    few = args.few
+    query = args.query
+    for few_shot in [few]:
         for i in range(1):
             save_rel = True
             trainer = Trainer('./' + dataset, 'TransE', num_class, few_shot, './save_model', max_neighbor=50,
-                              query_size=5, batch_num_max=batch_max, save_rel=save_rel, baseline_proto='relation')
+                              query_size=query, batch_num_max=batch_max, save_rel=save_rel, baseline_proto='relation')
             score = trainer.train()
             if dataset not in result:
                 result[dataset] = [score]
